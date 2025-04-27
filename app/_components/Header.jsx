@@ -8,7 +8,7 @@ export function Header() {
       <div className="container flex h-14 items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2">
           <BookOpen className="h-6 w-6 text-cyan-800" />
-          <span className="font-bold sm:inline-block ">
+          <span className="font-bold sm:inline-block text-2xl">
             KnowYourDepartment
           </span>
         </Link>
