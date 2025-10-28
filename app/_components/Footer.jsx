@@ -10,7 +10,7 @@ export function Footer() {
           developed by Asif,Saheb,Dilkushad,Sababul,Samim
         </p>
       </div>
-      
+
     </footer>
   );
 }
