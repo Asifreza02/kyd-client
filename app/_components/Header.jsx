@@ -1,8 +1,12 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { BookOpen, FileText, Home, Users , ListFilterPlus} from 'lucide-react';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 export function Header() {
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === 'authenticated';
+
   return (
     <header className="sticky top-0 z-50 border-b text-xl bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-2 md:px-4">
       <div className="container flex h-14 items-center justify-between">
@@ -41,11 +45,21 @@ export function Header() {
               <ListFilterPlus className="mr-1 sm:mr-2 h-4 w-4 " /> <span className='hidden md:inline'>Asked AI</span>
             </Button>
           </Link>
-          <Link href="/login">
-            <Button variant="ghost" className="md:text-md md:font-large bg-cyan-700 text-white hover:bg-cyan-800">
-               LOGIN
-            </Button>
-          </Link>
+          <div>
+             {isAuthenticated ? (
+            <div>
+              <Button variant="ghost" className="md:text-md md:font-large bg-cyan-700 text-white hover:bg-cyan-800" onClick={() => signOut()}>
+                LOGOUT
+              </Button>
+            </div>
+          ) : (
+            <Link href="/login">
+              <Button variant="ghost" className="md:text-md md:font-large bg-cyan-700 text-white hover:bg-cyan-800">
+                LOGIN
+              </Button>
+            </Link>
+          )}
+          </div>
           </div>
         </nav>
       </div>
