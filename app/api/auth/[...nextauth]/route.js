@@ -37,5 +37,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
 })
 
-// ✅ Properly export for Next.js App Router
+
 export const { GET, POST } = handlers

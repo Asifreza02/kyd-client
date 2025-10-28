@@ -59,7 +59,7 @@ export function Header() {
           {/* Right Side - AI + Auth */}
           <div className="flex items-center justify-center gap-2 md:gap-4">
             <Link href="/ai">
-              <Button variant="ghost" className="text-md font-medium">
+              <Button variant="ghost" className="text-md font-medium mr-2 md:mr-8">
                 <ListFilterPlus className="mr-1 sm:mr-2 h-4 w-4" />
                 <span className="hidden md:inline">Asked AI</span>
               </Button>
@@ -70,7 +70,7 @@ export function Header() {
               <Button
                 onClick={() => signOut({ callbackUrl: '/login' })}
                 variant="ghost"
-                className="md:text-md md:font-medium bg-cyan-700 text-white hover:bg-cyan-800"
+                className="md:text-md md:font-medium bg-red-500 cursor-pointer text-white hover:bg-red-600"
               >
                 LOGOUT
               </Button>
