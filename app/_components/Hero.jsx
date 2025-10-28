@@ -8,18 +8,18 @@ const Hero = () => {
   return (
     <div className="my-10">
       <section className="text-center mb-12">
-        <h1 className="text-4xl font-bold tracking-tight mb-2 lg:text-5xl text-cyan-700">
+        <h1 className=" text-2xl md:text-3xl font-bold tracking-tight mb-2 lg:text-5xl text-cyan-700 text-center">
           Welcome to KnowYourDepartment
         </h1>
-        <p className="text-2xl text-muted-foreground ">
+        <p className="text-xl md:text-2xl text-muted-foreground ">
           presented by
         </p>
-        <h1 className="text-5xl font-bold lg:text-6xl mb-8 text-cyan-800"> JIS University</h1>
-        <p className="text-2xl ">
+        <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-8 text-cyan-800"> JIS University</h1>
+        <p className="text-md md:text-2xl ">
           Your central place to find information about teachers, class notes, and previous year questions for your department.
         </p>
       </section>
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-10 my-20">
+      <section className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-4 md:mx-10 my-20">
         <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-slate-100">
           <CardHeader>
             <Users className="h-10 w-10  mb-6 text-cyan-700" />
