@@ -8,14 +8,14 @@ const Hero = () => {
   return (
     <div className="my-10">
          <section className="text-center mb-12">
-         <h1 className="text-4xl font-bold tracking-tight lg:text-5xl mb-4 text-cyan-700">
+         <h1 className="text-4xl font-bold tracking-tight mb-2 lg:text-5xl text-cyan-700">
           Welcome to KnowYourDepartment
         </h1>
           <p className="text-2xl text-muted-foreground ">
-          presented by,
+          presented by
         </p>
-        <h1 className="text-5xl font-bold lg:text-6xl mb-6 text-cyan-800"> JIS University</h1>
-        <p className="text-2xl text-muted-foreground">
+        <h1 className="text-5xl font-bold lg:text-6xl mb-8 text-cyan-800"> JIS University</h1>
+        <p className="text-2xl ">
           Your central place to find information about teachers, class notes, and previous year questions for your department.
         </p>
       </section>
