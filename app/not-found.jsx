@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { SearchX } from 'lucide-react'
@@ -10,10 +12,8 @@ export default function NotFound() {
       <p className="text-lg text-muted-foreground mb-8">
         Oops! The page you are looking for does not exist or may have been moved.
       </p>
-      <Link href="/" passHref legacyBehavior>
-        <Button>
-            Go back to Home
-        </Button>
+      <Link href="/" className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+        <span>Go back to Home</span>
       </Link>
     </div>
   )

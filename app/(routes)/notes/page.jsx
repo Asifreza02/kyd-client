@@ -81,12 +81,13 @@ export default function NotesPage() {
              }
             return (
               <AccordionItem value={course} key={course}>
-                <AccordionTrigger className="text-lg font-semibold text-primary hover:no-underline hover:text-accent transition-colors">
-                    <div className="flex items-center gap-3">
-                        <BookOpen className="h-5 w-5 text-muted-foreground"/>
-                        {course}
-                    </div>
-                </AccordionTrigger>
+        <AccordionTrigger className="text-lg font-semibold text-primary hover:no-underline hover:text-accent transition-colors">
+          {/* Only a single React element as child */}
+          <span className="flex items-center gap-3">
+            <BookOpen className="h-5 w-5 text-muted-foreground"/>
+            {course}
+          </span>
+        </AccordionTrigger>
                 <AccordionContent>
                   <div className="space-y-4 pl-4 border-l-2 border-accent ml-2 py-2">
                     {courseNotes.map((note) => (
@@ -98,11 +99,12 @@ export default function NotesPage() {
                                 Uploaded by {note.uploader} on {note.date}
                               </p>
                             </div>
-                            <a href={note.fileUrl} download={note.name} target="_blank" rel="noopener noreferrer">
-                              <Button variant="outline" size="sm">
+                              <button
+                                onClick={() => window.open(note.fileUrl, '_blank')}
+                                className="inline-flex items-center justify-center rounded-md border bg-background px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                              >
                                 <Download className="mr-2 h-4 w-4" /> Download
-                              </Button>
-                            </a>
+                              </button>
                           </CardContent>
                         </Card>
                       ))}

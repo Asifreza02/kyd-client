@@ -27,11 +27,12 @@ const Hero = () => {
             <CardDescription className="text-lg">Find contact information, office hours, and research interests of department faculty.</CardDescription>
           </CardHeader>
           <CardContent>
-            <Link href="/teachers" passHref legacyBehavior>
-              <Button className="w-full h-12 text-xl" variant="outline">
-                View Teachers <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
+             <button
+               onClick={() => window.location.href = '/teachers'}
+               className="inline-flex w-full h-12 text-xl items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+             >
+               View Teachers <ArrowRight className="ml-2 h-4 w-4" />
+             </button>
           </CardContent>
         </Card>
 
@@ -42,11 +43,12 @@ const Hero = () => {
             <CardDescription className="text-lg">Access shared class notes organized by course. Upload your notes to help others.</CardDescription>
           </CardHeader>
           <CardContent>
-             <Link href="/notes" passHref legacyBehavior>
-               <Button className="w-full h-12 text-xl" variant="outline">
-                 Browse Notes <ArrowRight className="ml-2 h-4 w-4" />
-               </Button>
-             </Link>
+             <button
+               onClick={() => window.location.href = '/notes'}
+               className="inline-flex w-full h-12 text-xl items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+             >
+               Browse Notes <ArrowRight className="ml-2 h-4 w-4" />
+             </button>
           </CardContent>
         </Card>
 
@@ -57,11 +59,12 @@ const Hero = () => {
             <CardDescription className="text-lg">Explore previous year question papers to aid your exam preparation. Upload papers you have.</CardDescription>
           </CardHeader>
           <CardContent>
-             <Link href="/pyqs" passHref legacyBehavior>
-               <Button className="w-full h-12 text-xl " variant="outline">
-                 Find PYQs <ArrowRight className="ml-2 h-4 w-4" />
-               </Button>
-             </Link>
+             <button
+               onClick={() => window.location.href = '/pyqs'}
+               className="inline-flex w-full h-12 text-xl items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+             >
+               Find PYQs <ArrowRight className="ml-2 h-4 w-4" />
+             </button>
           </CardContent>
         </Card>
       </section>

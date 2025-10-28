@@ -13,22 +13,22 @@ export function Header() {
           </span>
         </Link>
         <nav className="flex flex-1 items-center space-x-4">
-          <Link href="/" legacyBehavior passHref>
+          <Link href="/">
             <Button variant="ghost" className="text-md font-medium">
               <Home className="mr-2 h-4 w-4" /> Home
             </Button>
           </Link>
-          <Link href="/teachers" legacyBehavior passHref>
+          <Link href="/teachers">
             <Button variant="ghost" className="text-md font-medium">
               <Users className="mr-2 h-4 w-4" /> Teachers
             </Button>
           </Link>
-          <Link href="/notes" legacyBehavior passHref>
+          <Link href="/notes">
             <Button variant="ghost" className="text-md font-medium">
               <BookOpen className="mr-2 h-4 w-4" /> Notes
             </Button>
           </Link>
-          <Link href="/pyqs" legacyBehavior passHref>
+          <Link href="/pyqs">
             <Button variant="ghost" className="text-md font-large">
               <FileText className="mr-2 h-4 w-4 " /> PYQs
             </Button>

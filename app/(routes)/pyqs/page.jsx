@@ -11,16 +11,13 @@ import { UploadDialog } from "@/app/_components/UploadDialog";
 // Sample data - replace with actual data fetching later
 const pyqsData = {
   "CS101 - Introduction to Computer Science": [
-    { id: 1, name: "Midterm Exam - Fall 2023", year: 2023, type: "Midterm", fileUrl: "#" },
-    { id: 2, name: "Final Exam - Spring 2023", year: 2023, type: "Final", fileUrl: "#" },
+    { id: 1, name: "Midterm Exam - Fall 2023", year: 2023, type: "Midterm", fileUrl: "#" }
   ],
   "MA201 - Calculus II": [
     { id: 3, name: "Quiz 1 - Spring 2024", year: 2024, type: "Quiz", fileUrl: "#" },
-    { id: 4, name: "Final Exam - Fall 2022", year: 2022, type: "Final", fileUrl: "#" },
+    { id: 4, name: "Final Exam - Fall 2022", year: 2022, type: "Final", fileUrl: "#" }
   ],
-   "PHY101 - Physics I": [
-     // No PYQs yet for this course in sample data
-   ],
+  "PHY101 - Physics I": []
 };
 
 
@@ -100,11 +97,12 @@ export default function PyqsPage() {
                                  Type: {pyq.type} | Year: {pyq.year}
                                 </p>
                               </div>
-                               <a href={pyq.fileUrl} download={pyq.name} target="_blank" rel="noopener noreferrer">
-                                 <Button variant="outline" size="sm">
-                                   <Download className="mr-2 h-4 w-4" /> Download
-                                 </Button>
-                               </a>
+                              <button
+                                onClick={() => window.open(pyq.fileUrl, '_blank')}
+                                className="inline-flex items-center justify-center rounded-md border bg-background px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                              >
+                                <Download className="mr-2 h-4 w-4" /> Download
+                              </button>
                             </CardContent>
                           </Card>
                         ))
