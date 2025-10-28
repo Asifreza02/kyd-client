@@ -7,11 +7,11 @@ import Link from "next/link";
 const Hero = () => {
   return (
     <div className="my-10">
-         <section className="text-center mb-12">
-         <h1 className="text-4xl font-bold tracking-tight mb-2 lg:text-5xl text-cyan-700">
+      <section className="text-center mb-12">
+        <h1 className="text-4xl font-bold tracking-tight mb-2 lg:text-5xl text-cyan-700">
           Welcome to KnowYourDepartment
         </h1>
-          <p className="text-2xl text-muted-foreground ">
+        <p className="text-2xl text-muted-foreground ">
           presented by
         </p>
         <h1 className="text-5xl font-bold lg:text-6xl mb-8 text-cyan-800"> JIS University</h1>
@@ -27,12 +27,12 @@ const Hero = () => {
             <CardDescription className="text-lg">Find contact information, office hours, and research interests of department faculty.</CardDescription>
           </CardHeader>
           <CardContent>
-             <button
-               onClick={() => window.location.href = '/teachers'}
-               className="inline-flex w-full h-12 text-xl items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-             >
-               View Teachers <ArrowRight className="ml-2 h-4 w-4" />
-             </button>
+            <button
+              onClick={() => window.location.href = '/teachers'}
+              className="inline-flex w-full h-12 text-xl items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+            >
+              View Teachers <ArrowRight className="ml-2 h-4 w-4" />
+            </button>
           </CardContent>
         </Card>
 
@@ -43,12 +43,12 @@ const Hero = () => {
             <CardDescription className="text-lg">Access shared class notes organized by course. Upload your notes to help others.</CardDescription>
           </CardHeader>
           <CardContent>
-             <button
-               onClick={() => window.location.href = '/notes'}
-               className="inline-flex w-full h-12 text-xl items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-             >
-               Browse Notes <ArrowRight className="ml-2 h-4 w-4" />
-             </button>
+            <button
+              onClick={() => window.location.href = '/notes'}
+              className="inline-flex w-full h-12 text-xl items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+            >
+              Browse Notes <ArrowRight className="ml-2 h-4 w-4" />
+            </button>
           </CardContent>
         </Card>
 
@@ -59,12 +59,12 @@ const Hero = () => {
             <CardDescription className="text-lg">Explore previous year question papers to aid your exam preparation. Upload papers you have.</CardDescription>
           </CardHeader>
           <CardContent>
-             <button
-               onClick={() => window.location.href = '/pyqs'}
-               className="inline-flex w-full h-12 text-xl items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-             >
-               Find PYQs <ArrowRight className="ml-2 h-4 w-4" />
-             </button>
+            <button
+              onClick={() => window.location.href = '/pyqs'}
+              className="inline-flex w-full h-12 text-xl items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+            >
+              Find PYQs <ArrowRight className="ml-2 h-4 w-4" />
+            </button>
           </CardContent>
         </Card>
       </section>

@@ -19,7 +19,7 @@ const notesData = {
     { id: 3, name: "Integration Techniques", uploader: "Charlie", date: "2024-02-01", fileUrl: "#" },
     { id: 4, name: "Series and Sequences", uploader: "Alice", date: "2024-02-08", fileUrl: "#" },
   ],
-   "PHY101 - Physics I": [
+  "PHY101 - Physics I": [
     { id: 5, name: "Kinematics Summary", uploader: "David", date: "2024-01-20", fileUrl: "#" },
   ],
 };
@@ -45,82 +45,82 @@ export default function NotesPage() {
   return (
     <div className="container mx-auto py-12 px-4">
       <section className="mb-8">
-         <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight lg:text-4xl mb-2">
-                Class Notes Repository
-              </h1>
-              <p className="text-lg text-muted-foreground">
-                Browse and share notes for your courses.
-              </p>
-            </div>
-             <Button onClick={() => setUploadDialogOpen(true)}>
-              <Upload className="mr-2 h-4 w-4" /> Upload Note
-            </Button>
-         </div>
-         {/* Search Input */}
-         <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-                type="search"
-                placeholder="Search courses..." // Updated placeholder
-                className="w-full max-w-sm pl-9" // Added padding for the icon
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-            />
-         </div>
+        <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight lg:text-4xl mb-2">
+              Class Notes Repository
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Browse and share notes for your courses.
+            </p>
+          </div>
+          <Button onClick={() => setUploadDialogOpen(true)}>
+            <Upload className="mr-2 h-4 w-4" /> Upload Note
+          </Button>
+        </div>
+        {/* Search Input */}
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            type="search"
+            placeholder="Search courses..." // Updated placeholder
+            className="w-full max-w-sm pl-9" // Added padding for the icon
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
       </section>
 
       {filteredCourses.length > 0 ? (
         <Accordion type="multiple" className="w-full">
           {filteredCourses.map((course) => {
-             const courseNotes = notesData[course];
-             // Skip rendering if a course somehow has no notes after filtering courses
-             if (!courseNotes || courseNotes.length === 0) {
-                return null;
-             }
+            const courseNotes = notesData[course];
+            // Skip rendering if a course somehow has no notes after filtering courses
+            if (!courseNotes || courseNotes.length === 0) {
+              return null;
+            }
             return (
               <AccordionItem value={course} key={course}>
-        <AccordionTrigger className="text-lg font-semibold text-primary hover:no-underline hover:text-accent transition-colors">
-          {/* Only a single React element as child */}
-          <span className="flex items-center gap-3">
-            <BookOpen className="h-5 w-5 text-muted-foreground"/>
-            {course}
-          </span>
-        </AccordionTrigger>
+                <AccordionTrigger className="text-lg font-semibold text-primary hover:no-underline hover:text-accent transition-colors">
+                  {/* Only a single React element as child */}
+                  <span className="flex items-center gap-3">
+                    <BookOpen className="h-5 w-5 text-muted-foreground" />
+                    {course}
+                  </span>
+                </AccordionTrigger>
                 <AccordionContent>
                   <div className="space-y-4 pl-4 border-l-2 border-accent ml-2 py-2">
                     {courseNotes.map((note) => (
-                        <Card key={note.id} className="shadow-sm">
-                          <CardContent className="pt-4 flex justify-between items-center flex-wrap gap-2">
-                            <div className="flex-1 min-w-[200px]">
-                              <p className="font-medium">{note.name}</p>
-                              <p className="text-sm text-muted-foreground">
-                                Uploaded by {note.uploader} on {note.date}
-                              </p>
-                            </div>
-                              <button
-                                onClick={() => window.open(note.fileUrl, '_blank')}
-                                className="inline-flex items-center justify-center rounded-md border bg-background px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                              >
-                                <Download className="mr-2 h-4 w-4" /> Download
-                              </button>
-                          </CardContent>
-                        </Card>
-                      ))}
+                      <Card key={note.id} className="shadow-sm">
+                        <CardContent className="pt-4 flex justify-between items-center flex-wrap gap-2">
+                          <div className="flex-1 min-w-[200px]">
+                            <p className="font-medium">{note.name}</p>
+                            <p className="text-sm text-muted-foreground">
+                              Uploaded by {note.uploader} on {note.date}
+                            </p>
+                          </div>
+                          <button
+                            onClick={() => window.open(note.fileUrl, '_blank')}
+                            className="inline-flex items-center justify-center rounded-md border bg-background px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                          >
+                            <Download className="mr-2 h-4 w-4" /> Download
+                          </button>
+                        </CardContent>
+                      </Card>
+                    ))}
                   </div>
                 </AccordionContent>
               </AccordionItem>
             )
-            })}
+          })}
         </Accordion>
       ) : (
-         <p className="text-center text-muted-foreground italic mt-8">
-            No courses found matching your search criteria.
-         </p>
+        <p className="text-center text-muted-foreground italic mt-8">
+          No courses found matching your search criteria.
+        </p>
       )}
 
-       <UploadDialog
+      <UploadDialog
         isOpen={isUploadDialogOpen}
         onClose={() => setUploadDialogOpen(false)}
         onUpload={handleUpload}
