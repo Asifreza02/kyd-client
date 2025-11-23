@@ -1,75 +1,72 @@
-import React from 'react'
+'use client';
+
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, FileText, Users, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { ArrowRight, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import Aurora from "./Aurora";
 
-const Hero = () => {
+export default function Hero() {
   return (
-    <div className="my-10">
-      <section className="text-center mb-12">
-        <h1 className=" text-2xl md:text-3xl font-bold tracking-tight mb-2 lg:text-5xl text-cyan-700 text-center">
-          Welcome to KnowYourDepartment
-        </h1>
-        <p className="text-xl md:text-2xl text-muted-foreground ">
-          presented by
-        </p>
-        <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-8 text-cyan-800"> JIS University</h1>
-        <p className="text-md md:text-2xl ">
-          Your central place to find information about teachers, class notes, and previous year questions for your department.
-        </p>
-      </section>
-      <section className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-4 md:mx-10 my-20">
-        <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-slate-100">
-          <CardHeader>
-            <Users className="h-10 w-10  mb-6 text-cyan-700" />
-            <CardTitle className="text-2xl">Teacher Directory</CardTitle>
-            <CardDescription className="text-lg">Find contact information, office hours, and research interests of department faculty.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <button
-              onClick={() => window.location.href = '/teachers'}
-              className="inline-flex w-full h-12 text-xl items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-            >
-              View Teachers <ArrowRight className="ml-2 h-4 w-4" />
-            </button>
-          </CardContent>
-        </Card>
+    <section className="relative overflow-hidden py-20 lg:py-32">
+      <Aurora
+        colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
+        blend={0.5}
+        amplitude={1.0}
+        speed={0.5}
+      />
+      <div className="container px-4 md:px-6 relative z-10">
+        <div className="flex flex-col items-center text-center space-y-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="space-y-4 max-w-3xl"
+          >
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-500 dark:from-white dark:to-zinc-400 animate-text-gradient bg-[200%_auto]">
+              Know Your Department
+            </h1>
+            <p className="mx-auto max-w-[700px] text-zinc-500 md:text-xl dark:text-zinc-400">
+              Discover the brilliant minds shaping the future. Connect with faculty, explore research, and stay informed.
+            </p>
+          </motion.div>
 
-        <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-slate-100">
-          <CardHeader>
-            <BookOpen className="h-10 w-10 text-cyan-700 mb-4" />
-            <CardTitle className="text-2xl">Class Notes</CardTitle>
-            <CardDescription className="text-lg">Access shared class notes organized by course. Upload your notes to help others.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <button
-              onClick={() => window.location.href = '/notes'}
-              className="inline-flex w-full h-12 text-xl items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-            >
-              Browse Notes <ArrowRight className="ml-2 h-4 w-4" />
-            </button>
-          </CardContent>
-        </Card>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="w-full max-w-md space-y-4"
+          >
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-background-shine bg-[length:200%_100%]"></div>
+              <div className="relative flex items-center bg-white dark:bg-zinc-950 rounded-lg p-1 shadow-xl">
+                <Search className="w-5 h-5 ml-3 text-zinc-400" />
+                <Input
+                  className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 bg-transparent"
+                  placeholder="Search for professors, research areas..."
+                />
+                <Button size="sm" className="rounded-md">
+                  Search
+                </Button>
+              </div>
+            </div>
+          </motion.div>
 
-        <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-slate-100">
-          <CardHeader>
-            <FileText className="h-10 w-10 text-cyan-700 mb-4" />
-            <CardTitle className="text-2xl">PYQ Archive</CardTitle>
-            <CardDescription className="text-lg">Explore previous year question papers to aid your exam preparation. Upload papers you have.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <button
-              onClick={() => window.location.href = '/pyqs'}
-              className="inline-flex w-full h-12 text-xl items-center justify-center rounded-md border bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-            >
-              Find PYQs <ArrowRight className="ml-2 h-4 w-4" />
-            </button>
-          </CardContent>
-        </Card>
-      </section>
-    </div>
-  )
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-wrap justify-center gap-4"
+          >
+            <Button variant="outline" className="rounded-full backdrop-blur-sm bg-white/30 dark:bg-black/30 border-white/50 dark:border-white/10 hover:bg-white/50 dark:hover:bg-black/50 transition-all duration-300">
+              Browse Faculty
+            </Button>
+            <Button variant="ghost" className="rounded-full group hover:bg-white/20 dark:hover:bg-black/20">
+              View Research <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
 }
-
-export default Hero
