@@ -9,25 +9,12 @@ import { useState } from 'react';
 import { UploadDialog } from "@/app/_components/UploadDialog";
 
 
-// Sample data - replace with actual data fetching later
-const notesData = {
-  "CS101 - Introduction to Computer Science": [
-    { id: 1, name: "Lecture 1 Notes - Basics", uploader: "Alice", date: "2024-01-15", fileUrl: "#" },
-    { id: 2, name: "Lecture 2 Notes - Variables", uploader: "Bob", date: "2024-01-22", fileUrl: "#" },
-  ],
-  "MA201 - Calculus II": [
-    { id: 3, name: "Integration Techniques", uploader: "Charlie", date: "2024-02-01", fileUrl: "#" },
-    { id: 4, name: "Series and Sequences", uploader: "Alice", date: "2024-02-08", fileUrl: "#" },
-  ],
-  "PHY101 - Physics I": [
-    { id: 5, name: "Kinematics Summary", uploader: "David", date: "2024-01-20", fileUrl: "#" },
-  ],
-};
+import { notesData } from "@/lib/data";
 
 export default function NotesPage() {
   const [isUploadDialogOpen, setUploadDialogOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState(''); // State for search term
-  const allCourses = Object.keys(notesData);
+
 
   const handleUpload = (file) => {
     // Placeholder for actual upload logic
@@ -37,10 +24,7 @@ export default function NotesPage() {
     // Show a success toast message (implementation depends on your toast library)
   };
 
-  // Filter courses based on search term
-  const filteredCourses = allCourses.filter(course =>
-    course.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+
 
   return (
     <div className="container mx-auto py-12 px-4">
@@ -71,52 +55,65 @@ export default function NotesPage() {
         </div>
       </section>
 
-      {filteredCourses.length > 0 ? (
-        <Accordion type="multiple" className="w-full">
-          {filteredCourses.map((course) => {
-            const courseNotes = notesData[course];
-            // Skip rendering if a course somehow has no notes after filtering courses
-            if (!courseNotes || courseNotes.length === 0) {
-              return null;
-            }
-            return (
-              <AccordionItem value={course} key={course}>
-                <AccordionTrigger className="text-lg font-semibold text-primary hover:no-underline hover:text-accent transition-colors">
-                  {/* Only a single React element as child */}
-                  <span className="flex items-center gap-3">
-                    <BookOpen className="h-5 w-5 text-muted-foreground" />
-                    {course}
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="space-y-4 pl-4 border-l-2 border-accent ml-2 py-2">
-                    {courseNotes.map((note) => (
-                      <Card key={note.id} className="shadow-sm">
-                        <CardContent className="pt-4 flex justify-between items-center flex-wrap gap-2">
-                          <div className="flex-1 min-w-[200px]">
-                            <p className="font-medium">{note.name}</p>
-                            <p className="text-sm text-muted-foreground">
-                              Uploaded by {note.uploader} on {note.date}
-                            </p>
+      {Object.keys(notesData).length > 0 ? (
+        <Accordion type="single" collapsible className="w-full space-y-4">
+          {Object.entries(notesData).map(([year, subjects]) => (
+            <AccordionItem value={year} key={year} className="border rounded-lg px-4 bg-white dark:bg-zinc-900">
+              <AccordionTrigger className="text-xl font-bold hover:no-underline">
+                {year}
+              </AccordionTrigger>
+              <AccordionContent className="pt-4">
+                <Accordion type="multiple" className="w-full">
+                  {Object.entries(subjects).map(([subject, notes]) => {
+                    // Filter notes based on search term if needed, or filter subjects
+                    // For simplicity, we'll show all for now, or you can implement deep filtering
+                    if (searchTerm && !subject.toLowerCase().includes(searchTerm.toLowerCase())) {
+                      return null;
+                    }
+
+                    return (
+                      <AccordionItem value={subject} key={subject} className="border-b-0 mb-2">
+                        <AccordionTrigger className="text-lg font-semibold text-primary hover:no-underline hover:text-accent transition-colors py-2">
+                          <span className="flex items-center gap-3">
+                            <BookOpen className="h-5 w-5 text-muted-foreground" />
+                            {subject}
+                          </span>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="space-y-3 pl-4 border-l-2 border-accent ml-2 py-2">
+                            {notes.map((note) => (
+                              <Card key={note.id} className="shadow-sm">
+                                <CardContent className="pt-4 flex justify-between items-center flex-wrap gap-2">
+                                  <div className="flex-1 min-w-[200px]">
+                                    <p className="font-medium">{note.name}</p>
+                                    <p className="text-sm text-muted-foreground">
+                                      Uploaded by {note.uploader} on {note.date}
+                                    </p>
+                                  </div>
+                                  <div className="flex gap-2">
+                                    <button
+                                      onClick={() => window.open(note.fileUrl, '_blank')}
+                                      className="inline-flex items-center justify-center rounded-md border bg-background px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                                    >
+                                      <Download className="mr-2 h-4 w-4" /> Download
+                                    </button>
+                                  </div>
+                                </CardContent>
+                              </Card>
+                            ))}
                           </div>
-                          <button
-                            onClick={() => window.open(note.fileUrl, '_blank')}
-                            className="inline-flex items-center justify-center rounded-md border bg-background px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                          >
-                            <Download className="mr-2 h-4 w-4" /> Download
-                          </button>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            )
-          })}
+                        </AccordionContent>
+                      </AccordionItem>
+                    );
+                  })}
+                </Accordion>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
         </Accordion>
       ) : (
         <p className="text-center text-muted-foreground italic mt-8">
-          No courses found matching your search criteria.
+          No notes found.
         </p>
       )}
 

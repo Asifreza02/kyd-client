@@ -1,15 +1,8 @@
-import { connectDB } from "@/lib/dbConnect";
-import Teacher from "@/models/Teachers";
+import { teachersData } from "@/lib/data";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  try {
-    await connectDB();
-    const teachers = await Teacher.find({});
-    return NextResponse.json(teachers);
-  } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
+  return NextResponse.json(teachersData);
 }
 
 export async function POST(request) {

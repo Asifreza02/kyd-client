@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Hero from "./_components/Hero";
 import TeacherCard from "./_components/TeacherCard";
+import Stats from "./_components/Stats";
+import Resources from "./_components/Resources";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -29,8 +31,9 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-zinc-50/50 dark:bg-zinc-950">
       <Hero />
+      <Stats />
 
-      <section className="container px-4 md:px-6 py-12 md:py-24">
+      <section id="faculty" className="container px-4 md:px-6 py-12 md:py-24">
         <div className="flex flex-col items-center mb-12">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">Our Faculty</h2>
           <div className="w-20 h-1 bg-primary rounded-full"></div>
@@ -50,6 +53,8 @@ export default function Home() {
           </div>
         )}
       </section>
+
+      <Resources />
     </main>
   );
 }

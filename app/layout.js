@@ -1,28 +1,40 @@
-import { GeistSans } from 'geist/font/sans'
-import './globals.css'
-import { Footer } from './_components/Footer'
-import { Header } from './_components/Header'
-import { cn } from '@/lib/utils'
-import { NextAuthProvider } from './providers/SessionProvider'
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { Providers } from "./providers/Providers";
+import { Header } from "./_components/Header";
+import { Footer } from "./_components/Footer";
+import Preloader from "./_components/Preloader";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata = {
-  title: 'DeptInfoHub - Know Your Department',
-  description:
-    'Information hub for department teachers, class notes, and previous year questions.',
-}
+  title: "Know Your Department",
+  description: "Information about teachers, notes, and PYQs",
+};
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="h-full">
-      <body className={cn('relative h-full font-sans antialiased', GeistSans.variable)}>
-        <NextAuthProvider>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
-        </NextAuthProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+      >
+        <Providers>
+          <Preloader />
+          <Header />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </Providers>
       </body>
     </html>
-  )
+  );
 }

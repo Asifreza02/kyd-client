@@ -58,11 +58,19 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex flex-wrap justify-center gap-4"
           >
-            <Button variant="outline" className="rounded-full backdrop-blur-sm bg-white/30 dark:bg-black/30 border-white/50 dark:border-white/10 hover:bg-white/50 dark:hover:bg-black/50 transition-all duration-300">
+            <Button
+              variant="outline"
+              className="rounded-full backdrop-blur-sm bg-white/30 dark:bg-black/30 border-white/50 dark:border-white/10 hover:bg-white/50 dark:hover:bg-black/50 transition-all duration-300"
+              onClick={() => document.getElementById('faculty')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               Browse Faculty
             </Button>
-            <Button variant="ghost" className="rounded-full group hover:bg-white/20 dark:hover:bg-black/20">
-              View Research <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <Button
+              variant="ghost"
+              className="rounded-full group hover:bg-white/20 dark:hover:bg-black/20"
+              onClick={() => document.getElementById('resources')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              View Resources <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </motion.div>
         </div>

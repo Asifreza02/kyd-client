@@ -1,10 +1,9 @@
 'use client';
 
-import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, BookOpen, User } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { motion } from 'framer-motion';
+import { Mail, Phone, MapPin, BookOpen, User } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 export default function TeacherCard({ teacher, index }) {
     return (
@@ -29,9 +28,9 @@ export default function TeacherCard({ teacher, index }) {
                         <CardDescription className="text-primary font-medium flex items-center gap-1">
                             <User className="w-3 h-3" /> {teacher.title}
                         </CardDescription>
-                        <Badge variant="secondary" className="w-fit mt-1 text-xs">
+                        <span className="inline-block mt-1 text-xs bg-primary/10 text-primary rounded px-1">
                             {teacher.department}
-                        </Badge>
+                        </span>
                     </div>
                 </CardHeader>
                 <CardContent className="grid gap-3 text-sm text-zinc-600 dark:text-zinc-400 mt-2">
@@ -49,9 +48,7 @@ export default function TeacherCard({ teacher, index }) {
                     </div>
                     <div className="flex items-start gap-2 mt-2 pt-2 border-t border-zinc-100 dark:border-zinc-800">
                         <BookOpen className="w-4 h-4 text-primary/70 mt-0.5" />
-                        <span className="line-clamp-2 text-xs italic">
-                            {teacher.research}
-                        </span>
+                        <span className="line-clamp-2 text-xs italic">{teacher.research}</span>
                     </div>
                 </CardContent>
             </Card>

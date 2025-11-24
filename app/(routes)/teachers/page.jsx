@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Mail, Phone, Building, FlaskConical, Filter } from "lucide-react";
@@ -11,80 +11,7 @@ import { Label } from "@/components/ui/label"
 
 
 // Sample data - replace with actual data fetching later
-const allTeachers = [
-  {
-    id: 1,
-    name: "Dr. Dharampal Singh",
-    title: "Professor",
-    email: "d.singh@jisuniversity.edu",
-    phone: "123-456-7890",
-    office: "Floor 9, Room 1003",
-    research: "Artificial Intelligence, Machine Learning",
-    avatarUrl: "https://picsum.photos/seed/teacher1/100/100",
-    initials: "ER",
-    department: "BTech",
-  },
-  {
-    id: 2,
-    name: "Dr. Sandip Roy",
-    title: "Associate Professor",
-    email: "s.roy@jisuniversity.edu",
-    phone: "123-456-7891",
-    office: "Floor 9, Room 1006",
-    research: "Data Structures, Algorithms",
-    avatarUrl: "https://picsum.photos/seed/teacher2/100/100",
-    initials: "SC",
-    department: "BTech",
-  },
-  {
-    id: 3,
-    name: "Dr. Anya Sharma",
-    title: "Assistant Professor",
-    email: "a.sharma@jisuniversity.edu",
-    phone: "123-456-7892",
-    office: "Floor 7, Room 8005",
-    research: "Software Engineering, Web Development",
-    avatarUrl: "https://picsum.photos/seed/teacher3/100/100",
-    initials: "AS",
-    department: "BCA",
-  },
-  {
-    id: 4,
-    name: "Dr. Marcus Green",
-    title: "Professor",
-    email: "m.green@university.edu",
-    phone: "123-456-7893",
-    office: "Pharmacy Wing, Lab 1",
-    research: "Pharmacokinetics, Drug Delivery",
-    avatarUrl: "https://picsum.photos/seed/teacher4/100/100",
-    initials: "MG",
-    department: "BPharm",
-  },
-   {
-    id: 5,
-    name: "Prof. Laura Jones",
-    title: "Associate Professor",
-    email: "l.jones@university.edu",
-    phone: "123-456-7894",
-    office: "Building C, Room 404",
-    research: "Database Management, Networking",
-    avatarUrl: "https://picsum.photos/seed/teacher5/100/100",
-    initials: "LJ",
-    department: "BCA",
-  },
-   {
-    id: 6,
-    name: "Dr. David Khan",
-    title: "Senior Lecturer",
-    email: "d.khan@university.edu",
-    phone: "123-456-7895",
-    office: "Pharmacy Wing, Office 5",
-    research: "Medicinal Chemistry",
-    avatarUrl: "https://picsum.photos/seed/teacher6/100/100",
-    initials: "DK",
-    department: "BPharm",
-  },
-];
+// Data is now fetched from API
 
 const departments = ["All", "BTech", "BPharm", "BCA"];
 
@@ -92,9 +19,29 @@ export default function TeachersPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('All');
 
+  const [allTeachers, setAllTeachers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTeachers = async () => {
+      try {
+        const res = await fetch('/api/teachers');
+        if (!res.ok) throw new Error('Failed to fetch teachers');
+        const data = await res.json();
+        setAllTeachers(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTeachers();
+  }, []);
+
   const filteredTeachers = allTeachers.filter(teacher => {
     const matchesSearch = teacher.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          teacher.research.toLowerCase().includes(searchTerm.toLowerCase());
+      teacher.research.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesDepartment = selectedDepartment === 'All' || teacher.department === selectedDepartment;
     return matchesSearch && matchesDepartment;
   });
@@ -109,32 +56,32 @@ export default function TeachersPage() {
           Find information about the faculty members in your department.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 mb-6">
-             <Input
-              type="search"
-              placeholder="Search teachers by name or research..."
-              className="max-w-sm"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <div className="flex items-center space-x-4">
-                 <Label className="flex items-center gap-2 shrink-0">
-                    <Filter className="h-4 w-4 text-muted-foreground"/>
-                    Filter by Department:
-                 </Label>
-                 <RadioGroup
-                    defaultValue="All"
-                    onValueChange={setSelectedDepartment}
-                    className="flex flex-wrap gap-x-4 gap-y-2"
-                    aria-label="Filter by department"
-                 >
-                 {departments.map((dept) => (
-                    <div key={dept} className="flex items-center space-x-2">
-                        <RadioGroupItem value={dept} id={`dept-${dept}`} />
-                        <Label htmlFor={`dept-${dept}`} className="font-normal cursor-pointer">{dept}</Label>
-                    </div>
-                 ))}
-                </RadioGroup>
-            </div>
+          <Input
+            type="search"
+            placeholder="Search teachers by name or research..."
+            className="max-w-sm"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <div className="flex items-center space-x-4">
+            <Label className="flex items-center gap-2 shrink-0">
+              <Filter className="h-4 w-4 text-muted-foreground" />
+              Filter by Department:
+            </Label>
+            <RadioGroup
+              defaultValue="All"
+              onValueChange={setSelectedDepartment}
+              className="flex flex-wrap gap-x-4 gap-y-2"
+              aria-label="Filter by department"
+            >
+              {departments.map((dept) => (
+                <div key={dept} className="flex items-center space-x-2">
+                  <RadioGroupItem value={dept} id={`dept-${dept}`} />
+                  <Label htmlFor={`dept-${dept}`} className="font-normal cursor-pointer">{dept}</Label>
+                </div>
+              ))}
+            </RadioGroup>
+          </div>
         </div>
 
       </section>
@@ -142,7 +89,11 @@ export default function TeachersPage() {
       <Separator className="my-8" />
 
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredTeachers.length > 0 ? (
+        {loading ? (
+          [...Array(6)].map((_, i) => (
+            <div key={i} className="h-64 bg-zinc-200 dark:bg-zinc-800 rounded-xl animate-pulse"></div>
+          ))
+        ) : filteredTeachers.length > 0 ? (
           filteredTeachers.map((teacher) => (
             <Card key={teacher.id} className="shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col">
               <CardHeader className="flex flex-row items-center gap-4 pb-4">
@@ -172,8 +123,8 @@ export default function TeachersPage() {
                     <span>{teacher.office}</span>
                   </div>
                   <div className="flex items-start gap-2">
-                     <FlaskConical className="h-4 w-4 text-accent mt-0.5 shrink-0" />
-                     <span className="font-medium">Research: <span className="font-normal">{teacher.research}</span></span>
+                    <FlaskConical className="h-4 w-4 text-accent mt-0.5 shrink-0" />
+                    <span className="font-medium">Research: <span className="font-normal">{teacher.research}</span></span>
                   </div>
                 </div>
               </CardContent>
