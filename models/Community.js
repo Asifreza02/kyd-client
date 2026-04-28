@@ -46,7 +46,17 @@ const CommunitySchema = new mongoose.Schema({
         type: String,
         enum: ['pending', 'approved', 'rejected'],
         default: 'pending',
-    }
+    },
+    rules: {
+        type: [String],
+        default: []
+    },
+    announcements: [{
+        title: String,
+        content: String,
+        date: { type: Date, default: Date.now },
+        author: String
+    }]
 }, { timestamps: true });
 
 export default mongoose.models.Community || mongoose.model('Community', CommunitySchema);

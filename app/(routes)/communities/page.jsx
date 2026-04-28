@@ -382,7 +382,7 @@ function CommunityCard({ community, isJoined, onSelectCommunity, handleApply, is
                             variant="outline"
                             className="w-full rounded-xl py-5 font-semibold border-primary/30 text-primary hover:bg-primary/5 transition-all gap-2"
                         >
-                            <MessageCircle className="w-4 h-4" /> Community Chat
+                            <UsersRound className="w-4 h-4" /> Enter Community
                         </Button>
                     </Link>
 
