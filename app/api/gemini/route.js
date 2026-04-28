@@ -15,7 +15,7 @@ export async function POST(req) {
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
         const prompt = `You are a helpful assistant for a university department website. 
     Answer the following question from a student: ${message}`;

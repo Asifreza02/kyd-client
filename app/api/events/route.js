@@ -1,15 +1,15 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/dbConnect";
-import Teacher from "@/models/Teachers";
+import Event from "@/models/Event";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
-import { fallbackTeacherDB } from "@/lib/fallbackDB";
+import { fallbackEventDB } from "@/lib/fallbackDB";
 
 async function getModel() {
     try {
         await connectDB();
-        return Teacher;
+        return Event;
     } catch (e) {
-        return fallbackTeacherDB;
+        return fallbackEventDB;
     }
 }
 
@@ -19,7 +19,7 @@ export async function GET(req) {
         // If it has status, maybe filter? For now just return all.
         // Frontend will filter pending vs approved based on role.
         const items = await Model.find({});
-        if (Model !== fallbackTeacherDB) {
+        if (Model !== fallbackEventDB) {
             if (items.sort) items.sort((a, b) => b.createdAt - a.createdAt);
         }
         return NextResponse.json(items);
@@ -31,7 +31,7 @@ export async function GET(req) {
 export async function POST(req) {
     const session = await auth();
     // Temporarily bypass authentication for testing
-    const hasPermission = session?.user?.role === 'admin' || session?.user?.permissions?.includes('manage_teachers') || true;
+    const hasPermission = session?.user?.role === 'admin' || session?.user?.permissions?.includes('manage_events') || true;
     
     if (!session || !hasPermission) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -41,22 +41,11 @@ export async function POST(req) {
         const Model = await getModel();
         const body = await req.json();
         
-        // Auto-generate missing fields for teacher creation
-        if (!body.id) {
-            body.id = Date.now();
+        // Auto-generate image if not provided
+        if (!body.image) {
+            const seed = (body.title || 'event').replace(/\s+/g, '').toLowerCase();
+            body.image = `https://picsum.photos/seed/${seed}/800/400`;
         }
-        if (!body.initials) {
-            body.initials = body.name
-                ? body.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)
-                : 'NA';
-        }
-        if (!body.avatarUrl) {
-            const seed = (body.name || 'teacher').replace(/\s+/g, '');
-            body.avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}`;
-        }
-        if (!body.phone) body.phone = 'N/A';
-        if (!body.office) body.office = 'N/A';
-        if (!body.research) body.research = '';
 
         const newItem = await Model.create(body);
         return NextResponse.json(newItem, { status: 201 });

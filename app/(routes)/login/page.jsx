@@ -1,15 +1,19 @@
 'use client';
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [rollNumber, setRollNumber] = useState("");
   const [password, setPassword] = useState("");
+  const searchParams = useSearchParams();
+  const justRegistered = searchParams.get("registered") === "true";
 
   const handleCredentialsLogin = async (e) => {
     e.preventDefault();
     await signIn("credentials", {
-      email,
+      rollNumber,
       password,
       callbackUrl: "/", // redirect after login
     });
@@ -22,15 +26,21 @@ export default function LoginPage() {
           Welcome Back 👋
         </h2>
 
+        {justRegistered && (
+          <div className="bg-emerald-50 border border-emerald-200 text-emerald-700 text-sm rounded-lg px-4 py-3 mb-4 text-center">
+            🎉 Account created successfully! Sign in below.
+          </div>
+        )}
+
         <form onSubmit={handleCredentialsLogin} className="space-y-4">
           <div>
-            <label className="block text-gray-700 text-sm mb-1">Email</label>
+            <label className="block text-gray-700 text-sm mb-1">Roll Number</label>
             <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              value={rollNumber}
+              onChange={(e) => setRollNumber(e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="you@example.com"
+              placeholder="e.g. 123456"
               required
             />
           </div>
@@ -54,6 +64,13 @@ export default function LoginPage() {
             Sign In
           </button>
         </form>
+
+        <p className="text-center text-sm text-gray-500 mt-4">
+          Don&apos;t have an account?{" "}
+          <Link href="/register" className="text-blue-500 hover:text-blue-600 font-medium">
+            Register
+          </Link>
+        </p>
 
         <div className="flex items-center my-6">
           <div className="flex-grow border-t border-gray-300"></div>

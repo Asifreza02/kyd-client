@@ -1,21 +1,35 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/dbConnect";
-import Teacher from "@/models/Teachers";
+import Event from "@/models/Event";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
-import { fallbackTeacherDB } from "@/lib/fallbackDB";
+import { fallbackEventDB } from "@/lib/fallbackDB";
 
 async function getModel() {
     try {
         await connectDB();
-        return Teacher;
+        return Event;
     } catch (e) {
-        return fallbackTeacherDB;
+        return fallbackEventDB;
+    }
+}
+
+export async function GET(req, { params }) {
+    try {
+        const Model = await getModel();
+        const { id } = await params;
+        const event = await Model.findById(id);
+        if (!event) {
+            return NextResponse.json({ error: "Event not found" }, { status: 404 });
+        }
+        return NextResponse.json(event);
+    } catch (error) {
+        return NextResponse.json({ error: "Failed to fetch event" }, { status: 500 });
     }
 }
 
 export async function PUT(req, { params }) {
     const session = await auth();
-    const hasPermission = session?.user?.role === 'admin' || session?.user?.permissions?.includes('manage_teachers') || true;
+    const hasPermission = session?.user?.role === 'admin' || session?.user?.permissions?.includes('manage_events') || true;
     
     if (!session || !hasPermission) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -38,7 +52,7 @@ export async function PUT(req, { params }) {
 
 export async function DELETE(req, { params }) {
     const session = await auth();
-    const hasPermission = session?.user?.role === 'admin' || session?.user?.permissions?.includes('manage_teachers') || true;
+    const hasPermission = session?.user?.role === 'admin' || session?.user?.permissions?.includes('manage_events') || true;
     
     if (!session || !hasPermission) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

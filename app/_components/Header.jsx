@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { BookOpen, FileText, Home, Users, Sparkles } from 'lucide-react'
+import { BookOpen, FileText, Home, Users, Sparkles, CalendarDays, UsersRound, ShieldCheck, User } from 'lucide-react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { motion } from 'framer-motion'
 
@@ -47,25 +47,55 @@ export function Header() {
             </Button>
           </Link>
 
-          <Link href="/ai">
+          <Link href="/events">
             <Button variant="ghost" size="sm" className="rounded-full hover:bg-white/50 dark:hover:bg-white/10 text-primary font-medium">
-              <Sparkles className="h-4 w-4" />
-              <span className="hidden md:inline ml-2">Ask AI</span>
+              <CalendarDays className="h-4 w-4" />
+              <span className="hidden md:inline ml-2">Events</span>
             </Button>
           </Link>
 
+          <Link href="/communities">
+            <Button variant="ghost" size="sm" className="rounded-full hover:bg-white/50 dark:hover:bg-white/10 text-primary font-medium">
+              <UsersRound className="h-4 w-4" />
+              <span className="hidden md:inline ml-2">Communities</span>
+            </Button>
+          </Link>
+
+
+
           <div className="h-6 w-px bg-zinc-200 dark:bg-zinc-800 mx-2"></div>
+
+          {session?.user?.role === 'admin' && (
+            <Link href="/admin">
+              <Button variant="ghost" size="sm" className="rounded-full hover:bg-white/50 dark:hover:bg-white/10 text-rose-500 font-medium mr-1">
+                <ShieldCheck className="h-4 w-4" />
+                <span className="hidden md:inline ml-2">Admin</span>
+              </Button>
+            </Link>
+          )}
 
           {/* Auth Buttons */}
           {isAuthenticated ? (
-            <Button
-              onClick={() => signOut({ callbackUrl: '/login' })}
-              variant="ghost"
-              size="sm"
-              className="rounded-full text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
-            >
-              Logout
-            </Button>
+            <div className="flex items-center gap-1">
+              <Link href="/profile">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="rounded-full text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                >
+                  <User className="h-4 w-4 mr-2" />
+                  <span className="hidden sm:inline">Profile</span>
+                </Button>
+              </Link>
+              <Button
+                onClick={() => signOut({ callbackUrl: '/login' })}
+                variant="ghost"
+                size="sm"
+                className="rounded-full text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 ml-1"
+              >
+                Logout
+              </Button>
+            </div>
           ) : (
             <Button
               onClick={() => signIn(undefined, { callbackUrl: '/' })}

@@ -5,6 +5,7 @@ import Hero from "./_components/Hero";
 import TeacherCard from "./_components/TeacherCard";
 import Stats from "./_components/Stats";
 import Resources from "./_components/Resources";
+import MyCommunities from "./_components/MyCommunities";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -32,6 +33,7 @@ export default function Home() {
     <main className="min-h-screen bg-zinc-50/50 dark:bg-zinc-950">
       <Hero />
       <Stats />
+      <MyCommunities />
 
       <section id="faculty" className="container px-4 md:px-6 py-12 md:py-24">
         <div className="flex flex-col items-center mb-12">

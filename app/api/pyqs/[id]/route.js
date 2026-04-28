@@ -1,21 +1,21 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/dbConnect";
-import Teacher from "@/models/Teachers";
+import PYQ from "@/models/PYQ";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
-import { fallbackTeacherDB } from "@/lib/fallbackDB";
+import { fallbackPYQDB } from "@/lib/fallbackDB";
 
 async function getModel() {
     try {
         await connectDB();
-        return Teacher;
+        return PYQ;
     } catch (e) {
-        return fallbackTeacherDB;
+        return fallbackPYQDB;
     }
 }
 
 export async function PUT(req, { params }) {
     const session = await auth();
-    const hasPermission = session?.user?.role === 'admin' || session?.user?.permissions?.includes('manage_teachers') || true;
+    const hasPermission = session?.user?.role === 'admin' || session?.user?.permissions?.includes('manage_pyqs') || true;
     
     if (!session || !hasPermission) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -38,7 +38,7 @@ export async function PUT(req, { params }) {
 
 export async function DELETE(req, { params }) {
     const session = await auth();
-    const hasPermission = session?.user?.role === 'admin' || session?.user?.permissions?.includes('manage_teachers') || true;
+    const hasPermission = session?.user?.role === 'admin' || session?.user?.permissions?.includes('manage_pyqs') || true;
     
     if (!session || !hasPermission) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

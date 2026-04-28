@@ -16,21 +16,54 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     Credentials({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
+        rollNumber: { label: "Roll Number", type: "text", placeholder: "e.g. 123456" },
         password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
-        // Basic sample login (replace with real logic)
-        if (
-          credentials.email === "test@example.com" &&
-          credentials.password === "password"
-        ) {
-          return { id: "1", name: "Test User", email: credentials.email }
+        // Find user in our mock DB
+        const { getUser } = require('@/lib/users');
+        const user = getUser(credentials.rollNumber);
+        
+        if (user) {
+          // Check stored password for registered users, or default "password" for seed users
+          const validPassword = user.password 
+            ? credentials.password === user.password 
+            : credentials.password === "password";
+          
+          if (validPassword) {
+            return { 
+                id: user.id, 
+                name: user.name, 
+                rollNumber: user.rollNumber, 
+                role: user.role,
+                permissions: user.permissions
+            };
+          }
         }
-        return null
+        return null;
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+        token.permissions = user.permissions;
+        token.rollNumber = user.rollNumber;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session?.user) {
+        session.user.id = token.id || token.sub;
+        session.user.role = token.role;
+        session.user.permissions = token.permissions;
+        session.user.rollNumber = token.rollNumber;
+      }
+      return session;
+    }
+  },
   pages: {
     signIn: "/login",
   },
