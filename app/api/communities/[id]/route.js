@@ -37,7 +37,7 @@ export async function PUT(req, { params }) {
 
     try {
         const Model = await getCommunityModel();
-        const { id } = params;
+        const { id } = await params;
         const body = await req.json();
         
         if (body.tags && typeof body.tags === 'string') {
@@ -64,7 +64,7 @@ export async function DELETE(req, { params }) {
 
     try {
         const Model = await getCommunityModel();
-        const { id } = params;
+        const { id } = await params;
         const deleted = await Model.findByIdAndDelete(id);
         if (deleted) {
             return NextResponse.json({ success: true });

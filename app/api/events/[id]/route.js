@@ -37,7 +37,7 @@ export async function PUT(req, { params }) {
 
     try {
         const Model = await getModel();
-        const { id } = params;
+        const { id } = await params;
         const body = await req.json();
         
         const updated = await Model.findByIdAndUpdate(id, body, { new: true, runValidators: true });
@@ -60,7 +60,7 @@ export async function DELETE(req, { params }) {
 
     try {
         const Model = await getModel();
-        const { id } = params;
+        const { id } = await params;
         const deleted = await Model.findByIdAndDelete(id);
         if (deleted) {
             return NextResponse.json({ success: true });
