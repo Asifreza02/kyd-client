@@ -21,7 +21,23 @@ export async function GET(req, { params }) {
         if (!community) {
             return NextResponse.json({ error: "Community not found" }, { status: 404 });
         }
-        return NextResponse.json(community);
+        const session = await auth();
+        const userId = session?.user?.id;
+        
+        let communityData = community.toObject ? community.toObject() : JSON.parse(JSON.stringify(community));
+        
+        const isLeader = communityData.leaderId === userId;
+        const isManager = communityData.managers?.includes(userId);
+        const isMember = communityData.members?.includes(userId);
+        const isAdmin = session?.user?.role === 'admin';
+
+        if (!isLeader && !isManager && !isMember && !isAdmin) {
+            // Scrub private features
+            communityData.announcements = [];
+            communityData.members = [];
+        }
+
+        return NextResponse.json(communityData);
     } catch (error) {
         return NextResponse.json({ error: "Failed to fetch community" }, { status: 500 });
     }

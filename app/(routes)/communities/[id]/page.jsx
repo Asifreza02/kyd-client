@@ -195,7 +195,7 @@ export default function CommunityDetailPage() {
                         transition={{ duration: 0.2 }}
                     >
                         {activeTab === 'about' && <AboutTab community={community} formatDate={formatDate} isMember={isMember} />}
-                        {activeTab === 'announcements' && <AnnouncementsTab community={community} isLeaderOrManager={isLeaderOrManager} onRefresh={() => router.refresh()} />}
+                        {activeTab === 'announcements' && <AnnouncementsTab community={community} isLeaderOrManager={isLeaderOrManager} onRefresh={() => router.refresh()} isMember={isMember} status={status} membershipLoading={membershipLoading} />}
                         {activeTab === 'chat' && <ChatTab community={community} communityId={communityId} session={session} status={status} isMember={isMember} membershipLoading={membershipLoading} />}
                         {activeTab === 'members' && <MembersTab community={community} isMember={isMember} session={session} status={status} />}
                     </motion.div>
@@ -308,7 +308,20 @@ function InfoRow({ icon: Icon, color, label, value }) {
 }
 
 // ── Announcements Tab ──
-function AnnouncementsTab({ community, isLeaderOrManager, onRefresh }) {
+function AnnouncementsTab({ community, isLeaderOrManager, onRefresh, isMember, status, membershipLoading }) {
+    if (status === 'unauthenticated' || (!membershipLoading && !isMember)) {
+        return (
+            <div className="flex flex-col items-center justify-center text-center bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-sm p-12 py-20 max-w-2xl mx-auto">
+                <div className="w-20 h-20 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mb-6">
+                    <Lock className="w-10 h-10 text-amber-600 dark:text-amber-400" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Members Only</h3>
+                <p className="text-zinc-500 max-w-md mb-8">You must be a member of <strong>{community.name}</strong> to view announcements.</p>
+                <Link href="/communities"><Button className="rounded-xl px-10 py-6 font-semibold shadow-lg">Apply to Join</Button></Link>
+            </div>
+        );
+    }
+
     const [isPosting, setIsPosting] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [announcements, setAnnouncements] = useState(community.announcements || []);

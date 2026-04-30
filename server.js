@@ -69,21 +69,26 @@ async function getMessages(communityId, limit = 50) {
 }
 
 // ── Application Schema (for membership checks) ──
-const applicationSchema = new mongoose.Schema({
-    communityId: { type: mongoose.Schema.Types.ObjectId, ref: 'Community' },
-    userId: String,
-    status: String,
+const communitySchemaLite = new mongoose.Schema({
+    members: [String],
+    managers: [String],
+    leaderId: String
 }, { strict: false });
 
-let Application;
+let CommunityLite;
 
 async function checkMembership(communityId, userId) {
     if (dbConnected) {
-        if (!Application) {
-            Application = mongoose.models.Application || mongoose.model('Application', applicationSchema);
+        if (!CommunityLite) {
+            CommunityLite = mongoose.models.Community || mongoose.model('Community', communitySchemaLite);
         }
-        const app = await Application.findOne({ communityId, userId, status: 'approved' });
-        return !!app;
+        const community = await CommunityLite.findById(communityId).lean();
+        if (community) {
+            if (community.leaderId === userId) return true;
+            if (community.managers && community.managers.includes(userId)) return true;
+            if (community.members && community.members.includes(userId)) return true;
+        }
+        return false;
     }
     // Fallback: allow all for testing
     return true;

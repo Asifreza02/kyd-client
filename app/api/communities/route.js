@@ -57,8 +57,8 @@ export async function POST(req) {
         body.lead = session.user.name;
         body.status = 'pending'; // Needs admin approval
         body.managers = [];
-        body.members = [];
-        body.memberCount = 0;
+        body.members = [session.user.id];
+        body.memberCount = 1;
 
         // Generate a random seed for the image if not provided
         if (!body.image) {
