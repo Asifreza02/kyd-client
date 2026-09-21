@@ -21,7 +21,7 @@ export default function PyqsPage() {
         if (!res.ok) throw new Error('Failed to fetch PYQs');
         const data = await res.json();
         // Only show approved PYQs on user-facing page
-        setPyqs(data.filter(p => p.status === 'approved'));
+        setPyqs(data.filter(p => !p.status || p.status === 'approved'));
       } catch (error) {
         console.error('Error fetching PYQs:', error);
       } finally {

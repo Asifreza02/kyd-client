@@ -22,18 +22,21 @@ export async function GET(req) {
         const Model = await getCommunityModel();
         let communities = await Model.find({});
 
-        // If not requesting all (admin view), only return approved communities
-        if (!showAll) {
-            communities = communities.filter(c => c.status === 'approved');
+        // If DB is empty, use fallback communities
+        if (!communities || communities.length === 0) {
+            communities = await fallbackCommunityDB.find({});
         }
 
-        if (Model !== fallbackCommunityDB) {
-            communities.sort((a, b) => b.createdAt - a.createdAt);
+        // Filter approved unless showAll is true
+        if (!showAll) {
+            communities = communities.filter(c => !c.status || c.status === 'approved');
         }
+
         return NextResponse.json(communities);
     } catch (error) {
         console.error("GET communities error:", error);
-        return NextResponse.json({ error: "Failed to fetch communities", details: error.message }, { status: 500 });
+        const fallbackItems = await fallbackCommunityDB.find({});
+        return NextResponse.json(fallbackItems);
     }
 }
 
@@ -47,20 +50,18 @@ export async function POST(req) {
     try {
         const Model = await getCommunityModel();
         const body = await req.json();
-        
+
         if (body.tags && typeof body.tags === 'string') {
             body.tags = body.tags.split(',').map(t => t.trim()).filter(Boolean);
         }
 
-        // Auto-set the creator as the leader
         body.leaderId = session.user.id;
         body.lead = session.user.name;
-        body.status = 'pending'; // Needs admin approval
+        body.status = 'pending';
         body.managers = [];
         body.members = [session.user.id];
         body.memberCount = 1;
 
-        // Generate a random seed for the image if not provided
         if (!body.image) {
             const seed = body.name.replace(/\s+/g, '').toLowerCase();
             body.image = `https://picsum.photos/seed/${seed}/600/400`;

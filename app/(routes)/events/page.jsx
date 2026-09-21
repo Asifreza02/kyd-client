@@ -23,7 +23,7 @@ export default function EventsPage() {
                 if (!res.ok) throw new Error('Failed to fetch events');
                 const data = await res.json();
                 // Only show approved events on the user-facing page
-                setEvents(data.filter(e => e.status === 'approved'));
+                setEvents(data.filter(e => !e.status || e.status === 'approved'));
             } catch (error) {
                 console.error('Error fetching events:', error);
             } finally {

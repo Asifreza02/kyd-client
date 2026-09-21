@@ -21,7 +21,7 @@ export default function NotesPage() {
         if (!res.ok) throw new Error('Failed to fetch notes');
         const data = await res.json();
         // Only show approved notes on user-facing page
-        setNotes(data.filter(n => n.status === 'approved'));
+        setNotes(data.filter(n => !n.status || n.status === 'approved'));
       } catch (error) {
         console.error('Error fetching notes:', error);
       } finally {
