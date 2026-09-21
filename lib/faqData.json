@@ -11,16 +11,16 @@
       "category": "Notes & Study Materials",
       "questions": [
         {
-          "q": "How can I access lecture notes?",
-          "a": "Navigate to the Notes section from the resources page. You can filter notes by Year (1st, 2nd, 3rd, 4th Year) and subject code."
+          "q": "How can I access and download lecture notes?",
+          "a": "Navigate to the Notes section from the resources page (/notes). You can browse subjects by Year (1st to 4th Year) and click the Download button on any note to open and download the PDF document directly in your browser."
         },
         {
-          "q": "What subjects are currently available in the Notes section?",
-          "a": "Available subjects include: YCS 1001 (Introduction to Computing), YMA 1001 (Mathematics I), YCS 3001 (Data Structures), YCS 3002 (Algorithms), YCS 5001 (Operating Systems), YCS 5002 (Database Management Systems), YCS 7001 (Machine Learning), and YCS 7002 (Cybersecurity & Ethical Hacking)."
+          "q": "What sample PDF notes are available?",
+          "a": "Sample downloadable PDF notes include:\n- Data Structures & Algorithms (Trees, Graphs, DP)\n- Operating Systems (Process Management, Deadlocks & Memory)\n- Machine Learning (Neural Networks & SVM Guide)\n- DBMS (SQL Queries, Normalization & ACID Properties)\n- Mathematics I (Calculus & Linear Algebra Cheatsheet)\n- Cybersecurity (Ethical Hacking & Network Defense)."
         },
         {
           "q": "Can students upload their own notes?",
-          "a": "Yes! Logged-in students can upload notes via the Upload button in the Notes resource section. Uploaded notes undergo a quick peer review before being published."
+          "a": "Yes! Click on 'Upload Note' on the Notes page to upload your study files (.pdf, .docx, .txt)."
         }
       ]
     },
@@ -28,12 +28,12 @@
       "category": "Previous Year Questions (PYQs)",
       "questions": [
         {
-          "q": "Where can I find PYQs for exams?",
-          "a": "Visit the PYQs section under Resources. You can view and download Midterm and Final exam papers categorized by academic year and subject."
+          "q": "Where can I find and download PYQ papers?",
+          "a": "Visit the PYQs section (/pyqs). You can view and download Midterm and Final exam PDF question papers across 2022, 2023, and 2024."
         },
         {
-          "q": "Which PYQs are uploaded?",
-          "a": "Currently we have Midterm and Final question papers from 2022, 2023, 2024, and 2025 for 1st Year to 4th Year courses across BTech, BCA, and BPharm."
+          "q": "Which exam papers are available for download?",
+          "a": "Available downloadable question papers include:\n- YCS 3001 Data Structures Midterm Exam (2024)\n- YCS 3001 Data Structures Final Exam (2023)\n- YCS 5001 Operating Systems Final Exam (2023)\n- YCS 7001 Machine Learning Midterm Exam (2023)\n- YMA 1001 Mathematics I End Semester Exam (2022)."
         }
       ]
     },
@@ -42,7 +42,7 @@
       "questions": [
         {
           "q": "How do I contact my department professors?",
-          "a": "Go to the Teachers section on the homepage or navigation bar. You can view teacher profiles, emails, office room numbers, and research domains."
+          "a": "Go to the Teachers section (/teachers). You can view teacher profiles, emails, office room numbers, and research domains."
         },
         {
           "q": "Who are the key faculty members in BTech?",
@@ -58,12 +58,12 @@
       "category": "Events & Activities",
       "questions": [
         {
-          "q": "What upcoming events are scheduled?",
-          "a": "Upcoming events include:\n- TechFest 2026: May 15 (Main Auditorium)\n- AI & Future of Cloud Workshop: April 5 (Lab Block C, Room 302)\n- Spring Cultural Gala: April 20 (Open Air Theatre)\n- Inter-Department Cricket Tournament: March 10 (College Ground)\n- Alumni Meet 2026: June 5 (Banquet Hall)."
+          "q": "What upcoming events are scheduled on campus?",
+          "a": "Featured events include:\n- TechFest 2026: May 15 (Main Auditorium & Tech Quad)\n- AI & Future of Cloud Workshop: April 5 (Lab Block C, Room 302)\n- Spring Cultural Gala & Music Fest: April 20 (Open Air Theatre)\n- Inter-Department Cricket Championship: March 10 (Sports Ground)\n- Annual Alumni Networking Meet: June 5 (Grand Banquet Hall)\n- Capture The Flag (CTF) Cyber Arena: April 28 (Virtual Lab & Room 9002)."
         },
         {
           "q": "How do I register or participate in department events?",
-          "a": "Visit the Events page, click on the event card, and follow the registration button or contact the student event coordinator listed."
+          "a": "Visit the Events page (/events), click on any event card to view full schedule details, and click 'View Details' to register."
         }
       ]
     },
@@ -72,11 +72,11 @@
       "questions": [
         {
           "q": "What student communities exist in KYD?",
-          "a": "Active student communities include:\n- CodeCraft Hub (Coding, Open-source & Hackathons)\n- Robotics & AI Society (Autonomous Robots, Computer Vision & IoT)\n- CyberSec Alliance (Penetration testing, CTF challenges & Ethical Hacking)."
+          "a": "Active student communities include:\n- CodeCraft Hub (Coding, Open-source & Hackathons - 148 members)\n- Robotics & AI Society (Autonomous Robots, Vision & IoT - 112 members)\n- CyberSec Alliance (Penetration testing & CTFs - 94 members)\n- Cloud & DevOps Guild (Docker, K8s & AWS Cloud - 76 members)\n- UI/UX & Frontend Designers (Figma, Animations & Design Systems - 83 members)."
         },
         {
-          "q": "How do I join a community?",
-          "a": "Click on Communities in the top navigation bar, select a community, and click 'Join Community'."
+          "q": "How do I join or create a community?",
+          "a": "Go to the Communities page (/communities). You can apply to join any existing club with the 'Apply to Join' button or click '+ Create a Community' to start your own."
         }
       ]
     },
