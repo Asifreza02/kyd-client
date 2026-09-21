@@ -33,7 +33,10 @@ async function connectDB() {
     try {
         const uri = process.env.MONGODB_URI;
         if (!uri) throw new Error('Missing MONGODB_URI');
-        await mongoose.connect(uri, { bufferCommands: false });
+        await mongoose.connect(uri, {
+            bufferCommands: false,
+            serverSelectionTimeoutMS: 2500 // Fast 2.5s timeout
+        });
         Message = mongoose.models.Message || mongoose.model('Message', messageSchema);
         dbConnected = true;
         console.log('✅ Socket server: MongoDB connected');
@@ -46,10 +49,13 @@ async function connectDB() {
 // ── Message Persistence ──
 async function saveMessage(data) {
     if (dbConnected && Message) {
-        const doc = await Message.create(data);
-        return doc.toObject();
+        try {
+            const doc = await Message.create(data);
+            return doc.toObject();
+        } catch (e) {
+            console.warn('Failed to save message to DB, falling back to memory');
+        }
     }
-    // Fallback: in-memory
     if (!inMemoryMessages[data.communityId]) {
         inMemoryMessages[data.communityId] = [];
     }
@@ -60,10 +66,14 @@ async function saveMessage(data) {
 
 async function getMessages(communityId, limit = 50) {
     if (dbConnected && Message) {
-        return await Message.find({ communityId })
-            .sort({ createdAt: 1 })
-            .limit(limit)
-            .lean();
+        try {
+            return await Message.find({ communityId })
+                .sort({ createdAt: 1 })
+                .limit(limit)
+                .lean();
+        } catch (e) {
+            console.warn('Failed to get messages from DB, falling back to memory');
+        }
     }
     return (inMemoryMessages[communityId] || []).slice(-limit);
 }
@@ -79,27 +89,31 @@ let CommunityLite;
 
 async function checkMembership(communityId, userId) {
     if (dbConnected) {
-        if (!CommunityLite) {
-            CommunityLite = mongoose.models.Community || mongoose.model('Community', communitySchemaLite);
+        try {
+            if (!CommunityLite) {
+                CommunityLite = mongoose.models.Community || mongoose.model('Community', communitySchemaLite);
+            }
+            const community = await CommunityLite.findById(communityId).lean();
+            if (community) {
+                if (community.leaderId === userId) return true;
+                if (community.managers && community.managers.includes(userId)) return true;
+                if (community.members && community.members.includes(userId)) return true;
+            }
+            return false;
+        } catch (e) {
+            return true;
         }
-        const community = await CommunityLite.findById(communityId).lean();
-        if (community) {
-            if (community.leaderId === userId) return true;
-            if (community.managers && community.managers.includes(userId)) return true;
-            if (community.members && community.members.includes(userId)) return true;
-        }
-        return false;
     }
-    // Fallback: allow all for testing
     return true;
 }
 
 // ── Room Users Tracking ──
-const roomUsers = {}; // { communityId: Map<socketId, { userName, userId }> }
+const roomUsers = {};
 
 // ── Boot ──
-app.prepare().then(async () => {
-    await connectDB();
+app.prepare().then(() => {
+    // Attempt DB connection in background without blocking server startup
+    connectDB().catch(() => {});
 
     const server = createServer((req, res) => {
         const parsedUrl = parse(req.url, true);
@@ -114,9 +128,7 @@ app.prepare().then(async () => {
     io.on('connection', (socket) => {
         console.log('🔌 Client connected:', socket.id);
 
-        // ── Join a community chat room ──
         socket.on('join-room', async ({ communityId, userName, userId }) => {
-            // Verify membership
             const isMember = await checkMembership(communityId, userId);
             if (!isMember) {
                 socket.emit('error-msg', { message: 'You are not a member of this community.' });
@@ -126,23 +138,18 @@ app.prepare().then(async () => {
             socket.join(communityId);
             socket.data = { communityId, userName, userId };
 
-            // Track online users
             if (!roomUsers[communityId]) roomUsers[communityId] = new Map();
             roomUsers[communityId].set(socket.id, { userName, userId });
 
-            // Send message history
             const messages = await getMessages(communityId);
             socket.emit('message-history', messages);
 
-            // Broadcast online users list
             const users = Array.from(roomUsers[communityId].values());
             io.to(communityId).emit('room-users', users);
 
-            // Notify room
             socket.to(communityId).emit('user-joined', { userName });
         });
 
-        // ── Send a message ──
         socket.on('send-message', async ({ communityId, text, userId, userName }) => {
             if (!text || !text.trim()) return;
             const message = await saveMessage({
@@ -154,7 +161,6 @@ app.prepare().then(async () => {
             io.to(communityId).emit('new-message', message);
         });
 
-        // ── Typing indicators ──
         socket.on('typing', ({ communityId, userName }) => {
             socket.to(communityId).emit('user-typing', { userName });
         });
@@ -163,7 +169,6 @@ app.prepare().then(async () => {
             socket.to(communityId).emit('user-stop-typing', { userName: socket.data?.userName });
         });
 
-        // ── Disconnect ──
         socket.on('disconnect', () => {
             const { communityId, userName } = socket.data || {};
             if (communityId && roomUsers[communityId]) {
