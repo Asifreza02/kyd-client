@@ -6,7 +6,7 @@ import TeacherCard from "./_components/TeacherCard";
 import Stats from "./_components/Stats";
 import Resources from "./_components/Resources";
 import MyCommunities from "./_components/MyCommunities";
-import { motion } from "framer-motion";
+import AiAssistant from "./_components/AiAssistant";
 
 export default function Home() {
   const [teachers, setTeachers] = useState([]);
@@ -57,6 +57,9 @@ export default function Home() {
       </section>
 
       <Resources />
+
+      {/* Floating Gemini AI Assistant section in bottom-right corner */}
+      <AiAssistant />
     </main>
   );
 }

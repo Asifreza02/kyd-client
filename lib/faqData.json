@@ -1,0 +1,101 @@
+{
+  "platform": {
+    "name": "Know Your Dept (KYD)",
+    "description": "The official student and faculty portal for department resources, notes, PYQs, faculty directory, events, and student communities.",
+    "website": "http://localhost:3000",
+    "contact_email": "support@jisuniversity.edu",
+    "helpline": "+91 123-456-7890"
+  },
+  "faq_categories": [
+    {
+      "category": "Notes & Study Materials",
+      "questions": [
+        {
+          "q": "How can I access lecture notes?",
+          "a": "Navigate to the Notes section from the resources page. You can filter notes by Year (1st, 2nd, 3rd, 4th Year) and subject code."
+        },
+        {
+          "q": "What subjects are currently available in the Notes section?",
+          "a": "Available subjects include: YCS 1001 (Introduction to Computing), YMA 1001 (Mathematics I), YCS 3001 (Data Structures), YCS 3002 (Algorithms), YCS 5001 (Operating Systems), and YCS 7001 (Machine Learning)."
+        },
+        {
+          "q": "Can students upload their own notes?",
+          "a": "Yes! Logged-in students can upload notes via the Upload button in the Notes resource section. Uploaded notes undergo a quick peer review before being published."
+        }
+      ]
+    },
+    {
+      "category": "Previous Year Questions (PYQs)",
+      "questions": [
+        {
+          "q": "Where can I find PYQs for exams?",
+          "a": "Visit the PYQs section under Resources. You can view and download Midterm and Final exam papers categorized by academic year and subject."
+        },
+        {
+          "q": "Which PYQs are uploaded?",
+          "a": "Currently we have Midterm and Final question papers from 2022, 2023, and 2024 for 1st Year to 4th Year courses."
+        }
+      ]
+    },
+    {
+      "category": "Faculty & Staff Directory",
+      "questions": [
+        {
+          "q": "How do I contact my department professors?",
+          "a": "Go to the Teachers section on the homepage or navigation bar. You can view teacher profiles, emails, office room numbers, and research domains."
+        },
+        {
+          "q": "Who are the key faculty members in BTech?",
+          "a": "Dr. Dharampal Singh (Professor - Artificial Intelligence & Machine Learning, Office: Floor 9, Room 1003, Email: d.singh@jisuniversity.edu) and Dr. Sandip Roy (Associate Professor - Data Structures & Algorithms, Office: Floor 9, Room 1006, Email: s.roy@jisuniversity.edu)."
+        },
+        {
+          "q": "Who teaches BCA and BPharm courses?",
+          "a": "BCA faculty: Dr. Anya Sharma (Software Engineering) and Prof. Laura Jones (DBMS/Networking). BPharm faculty: Dr. Marcus Green and Dr. David Khan."
+        }
+      ]
+    },
+    {
+      "category": "Events & Activities",
+      "questions": [
+        {
+          "q": "What upcoming events are scheduled?",
+          "a": "Upcoming events include TechFest 2026 on May 15 (Main Auditorium), Spring Cultural Gala on April 20 (Open Air Theatre), and Alumni Meet 2026 on June 5."
+        },
+        {
+          "q": "How do I register or participate in department events?",
+          "a": "Visit the Events page, click on the event card, and follow the registration button or contact the student event coordinator listed."
+        }
+      ]
+    },
+    {
+      "category": "Student Communities & Clubs",
+      "questions": [
+        {
+          "q": "What are student communities in KYD?",
+          "a": "Communities are interest-based groups (e.g., Coding Club, AI & Robotics Group, Cyber Security Forum) where students collaborate, share resources, and organize workshops."
+        },
+        {
+          "q": "How do I join a community?",
+          "a": "Click on Communities in the top navigation bar, select a community, and click 'Join Community'."
+        }
+      ]
+    },
+    {
+      "category": "Academic Policies & Support",
+      "questions": [
+        {
+          "q": "What is the mandatory attendance requirement?",
+          "a": "A minimum of 75% attendance in theory and practical classes is required to be eligible for end-semester examinations."
+        },
+        {
+          "q": "What are the department lab timings?",
+          "a": "Computer & Research Labs are open Monday to Friday from 9:00 AM to 6:00 PM."
+        },
+        {
+          "q": "Who do I contact for website or account issues?",
+          "a": "You can reach out to support@jisuniversity.edu or visit the Department Admin Office (Floor 9, Room 1001)."
+        }
+      ]
+    }
+  ]
+}
