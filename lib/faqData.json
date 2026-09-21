@@ -16,7 +16,7 @@
         },
         {
           "q": "What subjects are currently available in the Notes section?",
-          "a": "Available subjects include: YCS 1001 (Introduction to Computing), YMA 1001 (Mathematics I), YCS 3001 (Data Structures), YCS 3002 (Algorithms), YCS 5001 (Operating Systems), and YCS 7001 (Machine Learning)."
+          "a": "Available subjects include: YCS 1001 (Introduction to Computing), YMA 1001 (Mathematics I), YCS 3001 (Data Structures), YCS 3002 (Algorithms), YCS 5001 (Operating Systems), YCS 5002 (Database Management Systems), YCS 7001 (Machine Learning), and YCS 7002 (Cybersecurity & Ethical Hacking)."
         },
         {
           "q": "Can students upload their own notes?",
@@ -33,7 +33,7 @@
         },
         {
           "q": "Which PYQs are uploaded?",
-          "a": "Currently we have Midterm and Final question papers from 2022, 2023, and 2024 for 1st Year to 4th Year courses."
+          "a": "Currently we have Midterm and Final question papers from 2022, 2023, 2024, and 2025 for 1st Year to 4th Year courses across BTech, BCA, and BPharm."
         }
       ]
     },
@@ -46,11 +46,11 @@
         },
         {
           "q": "Who are the key faculty members in BTech?",
-          "a": "Dr. Dharampal Singh (Professor - Artificial Intelligence & Machine Learning, Office: Floor 9, Room 1003, Email: d.singh@jisuniversity.edu) and Dr. Sandip Roy (Associate Professor - Data Structures & Algorithms, Office: Floor 9, Room 1006, Email: s.roy@jisuniversity.edu)."
+          "a": "BTech Faculty includes:\n- Dr. Dharampal Singh (Professor & HOD - AI & Machine Learning, Office: Floor 9, Room 1003, Email: d.singh@jisuniversity.edu)\n- Dr. Sandip Roy (Associate Professor - Data Structures & Algorithms, Office: Floor 9, Room 1006, Email: s.roy@jisuniversity.edu)\n- Dr. Vikram Seth (Professor - Cybersecurity & Ethical Hacking, Office: Floor 8, Room 9002, Email: v.seth@jisuniversity.edu)."
         },
         {
           "q": "Who teaches BCA and BPharm courses?",
-          "a": "BCA faculty: Dr. Anya Sharma (Software Engineering) and Prof. Laura Jones (DBMS/Networking). BPharm faculty: Dr. Marcus Green and Dr. David Khan."
+          "a": "BCA faculty:\n- Dr. Anya Sharma (Assistant Professor - Software Engineering & Cloud)\n- Prof. Laura Jones (Associate Professor - DBMS & Networks)\n- Prof. Priya Das (Assistant Professor - UI/UX & HCI).\n\nBPharm faculty:\n- Dr. Marcus Green (Pharmacokinetics, Lab 1)\n- Dr. David Khan (Medicinal Chemistry, Office 5)."
         }
       ]
     },
@@ -59,7 +59,7 @@
       "questions": [
         {
           "q": "What upcoming events are scheduled?",
-          "a": "Upcoming events include TechFest 2026 on May 15 (Main Auditorium), Spring Cultural Gala on April 20 (Open Air Theatre), and Alumni Meet 2026 on June 5."
+          "a": "Upcoming events include:\n- TechFest 2026: May 15 (Main Auditorium)\n- AI & Future of Cloud Workshop: April 5 (Lab Block C, Room 302)\n- Spring Cultural Gala: April 20 (Open Air Theatre)\n- Inter-Department Cricket Tournament: March 10 (College Ground)\n- Alumni Meet 2026: June 5 (Banquet Hall)."
         },
         {
           "q": "How do I register or participate in department events?",
@@ -71,8 +71,8 @@
       "category": "Student Communities & Clubs",
       "questions": [
         {
-          "q": "What are student communities in KYD?",
-          "a": "Communities are interest-based groups (e.g., Coding Club, AI & Robotics Group, Cyber Security Forum) where students collaborate, share resources, and organize workshops."
+          "q": "What student communities exist in KYD?",
+          "a": "Active student communities include:\n- CodeCraft Hub (Coding, Open-source & Hackathons)\n- Robotics & AI Society (Autonomous Robots, Computer Vision & IoT)\n- CyberSec Alliance (Penetration testing, CTF challenges & Ethical Hacking)."
         },
         {
           "q": "How do I join a community?",
